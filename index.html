@@ -30,11 +30,11 @@
         <input type="range" value="0" id="progress" />
 
         <div class="controls">
-          <div><i class="fa-solid fa-backward" ></i></div>
+          <div><i class="fa-solid fa-backward" id="backwardIcon"></i></div>
           <div onclick="playPause()">
             <i class="fa-solid fa-play" id="ctrlIcon"></i>
           </div>
-          <div><i class="fa-solid fa-forward"></i></div>
+          <div><i class="fa-solid fa-forward" id="forwardIcon"></i></div>
         </div>
       </div>
     </div>
@@ -43,6 +43,8 @@
       let progress = document.getElementById("progress");
       let song = document.querySelector("audio");
       let ctrlIcon = document.getElementById("ctrlIcon");
+      let backwardIcon = document.getElementById("backwardIcon");
+      let forwardIcon = document.getElementById("forwardIcon");
 
       song.onloadedmetadata = function () {
         progress.max = song.duration;
@@ -72,7 +74,14 @@
         ctrlIcon.classList.remove("fa-play");
       };
 
+      forwardIcon.onclick = function () {
+        song.currentTime = Math.min(song.currentTime + 10, song.duration);
+      };
 
+      backwardIcon.onclick = function () {
+        song.currentTime = Math.max(song.currentTime - 10, 0);
+      };
+      
     </script>
   </body>
 </html>
